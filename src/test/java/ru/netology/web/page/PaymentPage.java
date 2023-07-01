@@ -9,9 +9,9 @@ import static com.codeborne.selenide.Selenide.$$;
 public class PaymentPage {
     private final SelenideElement buttonBuyByDebitCard = $$(".button__text").find(exactText("Купить"));
     private final SelenideElement buttonBuyCreditCard = $$(".button__text").find(exactText("Купить в кредит"));
-    private final SelenideElement paymentBySelectedWayHeader = $$(".heading").find(exactText("Путешествие дня"));
 
     public PaymentPage() {
+        SelenideElement paymentBySelectedWayHeader = $$(".heading").find(exactText("Путешествие дня"));
         paymentBySelectedWayHeader.shouldBe(Condition.visible);
     }
 

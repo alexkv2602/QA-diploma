@@ -3,7 +3,6 @@ package ru.netology.web.page;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import lombok.val;
 import ru.netology.web.data.DataHelper;
 
 import java.time.Duration;
@@ -66,32 +65,32 @@ public class DebetCardPage {
     }
 
     public void shouldValueFieldNumberCard() {
-        val fieldNumberCard = resultLinks.find(text("Номер карты")).parent();
+        var fieldNumberCard = resultLinks.find(text("Номер карты")).parent();
         fieldNumberCard.shouldHave(text("Неверный формат"));
     }
 
     public void shouldValueFieldMonth() {
-        val fieldNumberCard = resultLinks.find(text("Месяц")).parent();
+        var fieldNumberCard = resultLinks.find(text("Месяц")).parent();
         fieldNumberCard.shouldHave(text("Неверный формат"));
     }
 
     public void shouldValueFieldYear() {
-        val fieldNumberCard = resultLinks.find(text("Год")).parent();
+        var fieldNumberCard = resultLinks.find(text("Год")).parent();
         fieldNumberCard.shouldHave(text("Неверный формат"));
     }
 
     public void shouldValueFieldCodeCVC() {
-        val fieldNumberCard = resultLinks.find(text("CVC/CVV")).parent();
+        var fieldNumberCard = resultLinks.find(text("CVC/CVV")).parent();
         fieldNumberCard.shouldHave(text("Неверный формат"));
     }
 
     public void shouldValueFieldHolder() {
-        val fieldNumberCard = resultLinks.find(text("Владелец")).parent();
+        var fieldNumberCard = resultLinks.find(text("Владелец")).parent();
         fieldNumberCard.shouldHave(text("Поле обязательно для заполнения"));
     }
 
     public void shouldValueFieldHolder2() {
-        val fieldNumberCard = resultLinks.find(text("Владелец")).parent();
+        var fieldNumberCard = resultLinks.find(text("Владелец")).parent();
         fieldNumberCard.shouldHave(text("Неверный формат"));
     }
 }

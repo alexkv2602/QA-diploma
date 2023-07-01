@@ -1,8 +1,6 @@
 package ru.netology.web.data;
 
-import lombok.val;
-
-import java.sql.SQLException;
+import lombok.SneakyThrows;
 
 import static java.sql.DriverManager.getConnection;
 
@@ -14,67 +12,52 @@ public class DbHelper {
     public DbHelper() {
     }
 
+    @SneakyThrows
     public static String getPaymentStatusByDebetCard() {
-        val statusBD = "SELECT status FROM payment_entity ORDER BY created DESC LIMIT 1";
+        var statusBD = "SELECT status FROM payment_entity ORDER BY created DESC LIMIT 1";
 
-        try (
-                val connection = getConnection(url, user, password);
-                val payStatus = connection.createStatement()
+        try (var connection = getConnection(url, user, password);
+             var payStatus = connection.createStatement();
+             var rs = payStatus.executeQuery(statusBD)
         ) {
-            try (val rs = payStatus.executeQuery(statusBD)) {
-                if (rs.next()) {
-                    val status = rs.getString(1);
-                    return status;
-                }
-                return null;
+            if (rs.next()) {
+                var status = rs.getString(1);
+                return status;
             }
-        } catch (SQLException exception) {
-            exception.printStackTrace();
+            return null;
         }
-        return null;
     }
 
+    @SneakyThrows
     public static String getPaymentStatusByCreditCard() {
-        val statusBD = "SELECT status FROM credit_request_entity ORDER BY created DESC LIMIT 1";
+        var statusBD = "SELECT status FROM credit_request_entity ORDER BY created DESC LIMIT 1";
 
-        try (
-                val connection = getConnection(url, user, password);
-                val payStatus = connection.createStatement()
+        try (var connection = getConnection(url, user, password);
+             var payStatus = connection.createStatement();
+             var rs = payStatus.executeQuery(statusBD)
         ) {
-            try (val rs = payStatus.executeQuery(statusBD)) {
-                if (rs.next()) {
-                    val status = rs.getString(1);
-                    return status;
-                }
-                return null;
+            if (rs.next()) {
+                var status = rs.getString(1);
+                return status;
             }
-        } catch (SQLException exception) {
-            exception.printStackTrace();
+            return null;
         }
-        return null;
     }
 
-
+    @SneakyThrows
     public static void cleanDataBase() {
+        var payment = "DELETE FROM payment_entity";
+        var credit = "DELETE FROM credit_request_entity";
+        var order = "DELETE FROM order_entity";
 
-        val payment = "DELETE FROM payment_entity";
-        val credit = "DELETE FROM credit_request_entity";
-        val order = "DELETE FROM order_entity";
-
-
-        try (
-                val conn = getConnection(url, user, password);
-                val prepareStatCredit = conn.createStatement();
-                val prepareStatOrder = conn.createStatement();
-                val prepareStatPayment = conn.createStatement()
+        try (var conn = getConnection(url, user, password);
+             var prepareStatCredit = conn.createStatement();
+             var prepareStatOrder = conn.createStatement();
+             var prepareStatPayment = conn.createStatement()
         ) {
             prepareStatCredit.executeUpdate(credit);
             prepareStatOrder.executeUpdate(order);
             prepareStatPayment.executeUpdate(payment);
-
-        } catch (SQLException exception) {
-            exception.printStackTrace();
         }
-
     }
 }
