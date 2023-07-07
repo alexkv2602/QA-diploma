@@ -55,7 +55,7 @@ test {
         systemProperty 'db.username', System.getProperty('db.username.mysql', 'app')
         systemProperty 'db.password', System.getProperty('db.password.mysql', 'pass')
     }
-    // Дополнительные настройки для PostgreSQL
+    // Дополнительные настройки для PostgresSQL
     systemProperty 'db.url.postgresql', System.getProperty('db.url.postgresql', 'jdbc:postgresql://localhost:5432/app')
     systemProperty 'db.username.postgresql', System.getProperty('db.username.postgresql', 'app')
     systemProperty 'db.password.postgresql', System.getProperty('db.password.postgresql', 'pass')
