@@ -28,7 +28,7 @@ public class DataHelper {
     static String nameHolder = faker.name().fullName();
     static String cvc = Integer.toString(faker.number().numberBetween(100, 999));
 
-    public static CardInfo getApprovedСard() {
+    public static CardInfo getApprovedCard() {
         return new CardInfo("4444 4444 4444 4441", monthWhenEndOfAction, yearWhenEndOfAction, nameHolder,
                 cvc);
     }

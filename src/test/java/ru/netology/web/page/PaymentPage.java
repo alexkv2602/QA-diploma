@@ -15,9 +15,9 @@ public class PaymentPage {
         paymentBySelectedWayHeader.shouldBe(Condition.visible);
     }
 
-    public DebetCardPage selectBuyByDebitCard() {
+    public DebitCardPage selectBuyByDebitCard() {
         buttonBuyByDebitCard.click();
-        return new DebetCardPage();
+        return new DebitCardPage();
     }
 
     public CreditCardPage selectBuyByCreditCard() {

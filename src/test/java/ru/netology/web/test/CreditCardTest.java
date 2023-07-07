@@ -4,16 +4,15 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
-
-import ru.netology.web.data.DbHelper;
 import ru.netology.web.data.DataHelper;
+import ru.netology.web.data.DbHelper;
 import ru.netology.web.page.PaymentPage;
 
+import java.sql.SQLException;
 
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static ru.netology.web.data.DataHelper.*;
-import static ru.netology.web.data.DbHelper.cleanDataBase;
+import static ru.netology.web.data.DataHelper.CardInfo;
 
 
 
@@ -21,7 +20,6 @@ public class CreditCardTest {
 
     @BeforeEach
     void openPage() {
-        cleanDataBase();
         Configuration.holdBrowserOpen = true;
         open("http://localhost:8080");
     }
@@ -39,21 +37,22 @@ public class CreditCardTest {
     @Nested
     class PurchaseByCardWithDifferentStatus {
         @Test
-        void shouldPurсhaseWithApprovedCreditCard() {
-            CardInfo validCardInformation = DataHelper.getApprovedСard();
+        void shouldPurchaseWithApprovedCreditCard() throws SQLException {
+            CardInfo validCardInformation = DataHelper.getApprovedCard();
             var travelPage = new PaymentPage();
             var creditCardPage = travelPage.selectBuyByCreditCard();
             creditCardPage.creditCardFullInformation(validCardInformation);
-            creditCardPage.approved();
+            creditCardPage.paymentApproved();
             assertEquals("APPROVED", DbHelper.getPaymentStatusByCreditCard());
         }
 
         @Test
-        void shouldPurchaseWithDeclinedCreditCard() {
+        void shouldPurchaseWithDeclinedCreditCard() throws SQLException {
             var invalidCardInformation = DataHelper.getDeclinedCard();
             var travelPage = new PaymentPage();
             var creditCardPage = travelPage.selectBuyByCreditCard();
             creditCardPage.creditCardFullInformation(invalidCardInformation);
+            creditCardPage.paymentDeclined();
             assertEquals("DECLINED", DbHelper.getPaymentStatusByCreditCard());
         }
     }
