@@ -1,9 +1,10 @@
 package ru.netology.web.data;
 
+import lombok.SneakyThrows;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DbHelper {
@@ -14,7 +15,8 @@ public class DbHelper {
     public DbHelper() {
     }
 
-    public static String getPaymentStatusByDebitCard() throws SQLException {
+    @SneakyThrows
+    public static String getPaymentStatusByDebitCard() {
         String statusBD = "SELECT status FROM payment_entity ORDER BY created DESC LIMIT 1";
 
         try (Connection connection = DriverManager.getConnection(url, user, password);
@@ -29,7 +31,8 @@ public class DbHelper {
         }
     }
 
-    public static String getPaymentStatusByCreditCard() throws SQLException {
+    @SneakyThrows
+    public static String getPaymentStatusByCreditCard() {
         String statusBD = "SELECT status FROM credit_request_entity ORDER BY created DESC LIMIT 1";
 
         try (Connection connection = DriverManager.getConnection(url, user, password);
@@ -43,5 +46,4 @@ public class DbHelper {
             return null;
         }
     }
-
 }

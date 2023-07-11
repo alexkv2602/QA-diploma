@@ -36,9 +36,6 @@ public class CreditCardPage {
         proceedButton.click();
     }
 
-    public void approved() {
-        paymentApprovedNotification.shouldBe(Condition.visible, Duration.ofSeconds(15));
-    }
 
 
     public void shouldValueFieldNumberCard() {
@@ -81,7 +78,7 @@ public class CreditCardPage {
     }
 
     public void shouldInvalidExpiredDateNotification() {
-        invalidExpiredDate.shouldBe(Condition.visible, Duration.ofSeconds(15));
+        invalidExpiredDate.shouldBe(Condition.visible);
     }
 
     public void shouldExpiredDatePassNotification() {

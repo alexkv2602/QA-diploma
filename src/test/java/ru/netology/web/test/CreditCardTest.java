@@ -188,7 +188,7 @@ public class CreditCardTest {
             var travelPage = new PaymentPage();
             var creditCardPage = travelPage.selectBuyByCreditCard();
             creditCardPage.creditCardFullInformation(cardHolder);
-            creditCardPage.approved();
+            creditCardPage.paymentApproved();
         }
     }
 
@@ -219,7 +219,7 @@ public class CreditCardTest {
             var travelPage = new PaymentPage();
             var creditCardPage = travelPage.selectBuyByCreditCard();
             creditCardPage.creditCardFullInformation(cardCvc);
-            creditCardPage.approved();
+            creditCardPage.paymentApproved();
         }
     }
 }

@@ -45,19 +45,13 @@ test {
 
     def dbProfile = System.getProperty('db')
     if (dbProfile) {
-        systemProperty 'spring.profiles.active', dbProfile
         systemProperty 'db.url', System.getProperty('db.url.' + dbProfile, 'jdbc:mysql://localhost:3306/app')
         systemProperty 'db.username', System.getProperty('db.username.' + dbProfile, 'app')
         systemProperty 'db.password', System.getProperty('db.password.' + dbProfile, 'pass')
     } else {
-        systemProperty 'spring.profiles.active', System.getProperty('spring.profiles.active', 'mysql')
         systemProperty 'db.url', System.getProperty('db.url.mysql', 'jdbc:mysql://localhost:3306/app')
         systemProperty 'db.username', System.getProperty('db.username.mysql', 'app')
         systemProperty 'db.password', System.getProperty('db.password.mysql', 'pass')
     }
-    // Дополнительные настройки для PostgresSQL
-    systemProperty 'db.url.postgresql', System.getProperty('db.url.postgresql', 'jdbc:postgresql://localhost:5432/app')
-    systemProperty 'db.username.postgresql', System.getProperty('db.username.postgresql', 'app')
-    systemProperty 'db.password.postgresql', System.getProperty('db.password.postgresql', 'pass')
 }
 

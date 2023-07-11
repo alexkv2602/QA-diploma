@@ -40,7 +40,7 @@ public class DebitCardPage {
     }
 
     public void shouldImproperFormatNotification() {
-        incorrectFormat.shouldBe(Condition.visible, Duration.ofSeconds(15));
+        incorrectFormat.shouldBe(Condition.visible);
     }
 
     public void shouldEmptyFieldNotification() {
@@ -49,7 +49,7 @@ public class DebitCardPage {
     }
 
     public void shouldInvalidExpiredDateNotification() {
-        invalidExpiredDate.shouldBe(Condition.visible, Duration.ofSeconds(15));
+        invalidExpiredDate.shouldBe(Condition.visible);
     }
 
     public void shouldExpiredDatePassNotification() {

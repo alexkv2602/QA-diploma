@@ -33,9 +33,9 @@ public class DebitCardTest {
     }
 
     @Nested
-    class shouldPurchaseByCardWithDifferentStatus {
+    class ShouldPurchaseByCardWithDifferentStatus {
         @Test
-        void purchaseWithApprovedDebitCard() throws SQLException {
+         void purchaseWithApprovedDebitCard() {
             var validCardInformation = DataHelper.getApprovedCard();
             var paymentPage = new PaymentPage().selectBuyByDebitCard();
             paymentPage.fillCardInformationForSelectedWay(validCardInformation);
@@ -45,7 +45,7 @@ public class DebitCardTest {
 
 
         @Test
-        void purchaseWithDeclinedDebitCard() throws SQLException {
+        void purchaseWithDeclinedDebitCard() {
             var invalidCardInformation = DataHelper.getDeclinedCard();
             var paymentPage = new PaymentPage().selectBuyByDebitCard();
             paymentPage.fillCardInformationForSelectedWay(invalidCardInformation);
