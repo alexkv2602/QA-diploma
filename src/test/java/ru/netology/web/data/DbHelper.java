@@ -18,32 +18,30 @@ public class DbHelper {
     @SneakyThrows
     public static String getPaymentStatusByDebitCard() {
         String statusBD = "SELECT status FROM payment_entity ORDER BY created DESC LIMIT 1";
+        Connection connection = DriverManager.getConnection(url, user, password);
+        Statement payStatus = connection.createStatement();
+        ResultSet rs = payStatus.executeQuery(statusBD);
 
-        try (Connection connection = DriverManager.getConnection(url, user, password);
-             Statement payStatus = connection.createStatement();
-             ResultSet rs = payStatus.executeQuery(statusBD)
-        ) {
-            if (rs.next()) {
-                String status = rs.getString(1);
-                return status;
-            }
-            return null;
+        String status = null;
+        if (rs.next()) {
+            status = rs.getString(1);
         }
+
+        return status;
     }
 
     @SneakyThrows
     public static String getPaymentStatusByCreditCard() {
         String statusBD = "SELECT status FROM credit_request_entity ORDER BY created DESC LIMIT 1";
+        Connection connection = DriverManager.getConnection(url, user, password);
+        Statement payStatus = connection.createStatement();
+        ResultSet rs = payStatus.executeQuery(statusBD);
 
-        try (Connection connection = DriverManager.getConnection(url, user, password);
-             Statement payStatus = connection.createStatement();
-             ResultSet rs = payStatus.executeQuery(statusBD)
-        ) {
-            if (rs.next()) {
-                String status = rs.getString(1);
-                return status;
-            }
-            return null;
+        String status = null;
+        if (rs.next()) {
+            status = rs.getString(1);
         }
+
+        return status;
     }
 }

@@ -44,14 +44,19 @@ test {
     systemProperty 'selenide.headless', System.getProperty('selenide.headless')
 
     def dbProfile = System.getProperty('db')
-    if (dbProfile) {
-        systemProperty 'db.url', System.getProperty('db.url.' + dbProfile, 'jdbc:mysql://localhost:3306/app')
-        systemProperty 'db.username', System.getProperty('db.username.' + dbProfile, 'app')
-        systemProperty 'db.password', System.getProperty('db.password.' + dbProfile, 'pass')
+    if (dbProfile == 'mysql') {
+        systemProperty 'db.url', System.getProperty('db.url.mysql', 'jdbc:mysql://localhost:3306/app')
+        systemProperty 'db.username', System.getProperty('db.username.mysql', 'app')
+        systemProperty 'db.password', System.getProperty('db.password.mysql', 'pass')
+    } else if (dbProfile == 'postgresql') {
+        systemProperty 'db.url', System.getProperty('db.url.postgresql', 'jdbc:postgresql://localhost:5432/app')
+        systemProperty 'db.username', System.getProperty('db.username.postgresql', 'app')
+        systemProperty 'db.password', System.getProperty('db.password.postgresql', 'pass')
     } else {
         systemProperty 'db.url', System.getProperty('db.url.mysql', 'jdbc:mysql://localhost:3306/app')
         systemProperty 'db.username', System.getProperty('db.username.mysql', 'app')
         systemProperty 'db.password', System.getProperty('db.password.mysql', 'pass')
     }
 }
+
 
